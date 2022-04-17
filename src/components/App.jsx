@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { fetchTodoList } from '../api/fetchData.api';
 
 function Header({title}) {
     return (<h1>{title ? title : "Default Title"}</h1>);
@@ -9,12 +10,7 @@ export default function App() {
 
     const [result, setResult] = useState(null);
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-        .then(res => res.json())
-        .then(result => setResult(result))
-        .catch(err => console.log(err));
-    }, [])
+    fetchTodoList(setResult);
 
     return (
         <div>
