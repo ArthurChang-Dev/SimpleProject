@@ -9,3 +9,8 @@ export const fetchTodoList = (setResult) => {
     }, [])
 };
 
+export const fetchTodoTest = () => {
+    fetch('/api/todo')
+    .then(res => res)
+    .catch(err => console.log(err));
+}

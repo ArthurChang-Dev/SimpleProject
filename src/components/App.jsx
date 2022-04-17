@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { fetchTodoList } from '../api/fetchData.api';
+import { useState } from 'react';
+import { fetchTodoList, fetchTodoTest } from '../api/fetchData.api';
 
 function Header({title}) {
     return (<h1>{title ? title : "Default Title"}</h1>);
@@ -16,7 +16,7 @@ export default function App() {
         <div>
             <Header title={"Rocket..🚀 🔥"} />
             <div><h3>{result?.length} items</h3></div>
-            <div><button onClick={() => {}}>Click</button></div>
+            <div><button onClick={() => fetchTodoTest()}>Click</button></div>
             <div>
                 <table>
                     <thead>
