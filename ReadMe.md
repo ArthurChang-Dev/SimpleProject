@@ -2,14 +2,14 @@
 
 ## Functinos to do lists
 ### Minimum react app 
-- [ ] Use minimum react and dependencies to start app  
-- [ ] Able to send request to mock API  
-- [ ] Able to initial FE component using data  
+- [x] Use minimum react and dependencies to start app  
+- [x] Able to send request to mock API  
+- [x] Able to initial FE component using data  
 - [ ] Use redux to manage data - including redux data store and reducer  
-- [ ] lp - Add search functionalities
+- [ ] low priority - Add search functionalities
 
 ### Minimum backend
-- [ ] Create initial backend project  
+- [x] Create initial backend project  
 - [ ] Save data to memory  
 - [ ] Support create/read/delete function  
 
