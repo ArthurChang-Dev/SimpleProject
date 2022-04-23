@@ -16,6 +16,7 @@
 ### DB
 - [ ] Create RDB locally  
 - [ ] CRUD operate against actual DB
+- [ ] Optimize the query string!
 
 ### Update structure
 - [ ] Create a vs workspace to manage the FE/BE
