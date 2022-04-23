@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Dtos;
 using TodoList.Services;
@@ -20,38 +19,21 @@ namespace TodoList.Controllers
         [HttpGet]
         public async Task<TodoResult> Get()
         {
-            return new TodoResult { Todos = MockTodoList() };
-        }
-
-        private List<Todo> MockTodoList()
-        {
-            return new List<Todo>
-            {
-                new Todo{Id = 1, Title = "Fix the issue of the FE." },
-                new Todo{Id = 2, Title = "Connect FE with BE. "},
-                new Todo{Id = 3, Title = "Create DB for todo list. "},
-                new Todo{Id = 4, Title = "Connect BE with DB. "},
-                new Todo{Id = 5, Title = "For test. "},
-            };
-        }
-
-        [HttpGet]
-        [Route("test")]
-        public async Task<TodoResult> Test()
-        {
             return await _todoService.GetTodos();
         }
 
-        [HttpGet]
-        [Route("save")]
-        public async Task Save()
+        [HttpPost]
+        [Route("create")]
+        public async Task Create([FromBody] Todo todo)
         {
-            var todo = new Todo
-            {
-                Id = null,
-                Title = "Move connection string to appsetting.json file. "
-            };
             await _todoService.SaveTodo(todo);
+        }
+
+        [HttpPost]
+        [Route("delete/{id}")]
+        public async Task Delete(int id)
+        {
+            await _todoService.UpdateTodo(id);
         }
     }
 }

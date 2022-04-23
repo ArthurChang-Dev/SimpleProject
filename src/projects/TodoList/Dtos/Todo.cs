@@ -8,5 +8,6 @@ namespace TodoList.Dtos
         public string Title { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
+        public bool Deleted { get; set; }
     }
 }
