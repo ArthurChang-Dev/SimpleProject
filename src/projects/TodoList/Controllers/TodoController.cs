@@ -37,9 +37,21 @@ namespace TodoList.Controllers
 
         [HttpGet]
         [Route("test")]
-        public TodoResult Test()
+        public async Task<TodoResult> Test()
         {
-            return _todoService.GetTodos();
+            return await _todoService.GetTodos();
+        }
+
+        [HttpGet]
+        [Route("save")]
+        public async Task Save()
+        {
+            var todo = new Todo
+            {
+                Id = null,
+                Title = "Move connection string to appsetting.json file. "
+            };
+            await _todoService.SaveTodo(todo);
         }
     }
 }

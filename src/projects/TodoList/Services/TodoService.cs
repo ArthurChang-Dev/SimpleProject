@@ -1,11 +1,13 @@
-﻿using TodoList.DataAccess;
+﻿using System.Threading.Tasks;
+using TodoList.DataAccess;
 using TodoList.Dtos;
 
 namespace TodoList.Services
 {
     public interface ITodoService
     {
-        public TodoResult GetTodos();
+        public Task<TodoResult> GetTodos();
+        public Task SaveTodo(Todo todo);
     }
 
     public class TodoService : ITodoService
@@ -17,10 +19,15 @@ namespace TodoList.Services
             _todoRepository = todoRepository;
         }
 
-        public TodoResult GetTodos()
+        public async Task<TodoResult> GetTodos()
         {
-            var todos = _todoRepository.GetTodos();
+            var todos = await _todoRepository.GetTodos();
             return new TodoResult { Todos = todos };
+        }
+
+        public async Task SaveTodo(Todo todo)
+        {
+            await _todoRepository.SaveTodo(todo);
         }
     }
 }
