@@ -11,7 +11,7 @@ namespace TodoList.DataAccess
         public List<Todo> GetTodos();
     }
 
-    public class TodoRepository
+    public class TodoRepository : ITodoRepository
     {
         public List<Todo> GetTodos()
         {
