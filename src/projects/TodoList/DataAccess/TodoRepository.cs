@@ -4,7 +4,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 using TodoList.Dtos;
+
+//Todo: store connection string to appsetting.json and make it configurable!!
+
 
 namespace TodoList.DataAccess
 {
@@ -18,10 +22,16 @@ namespace TodoList.DataAccess
 
     public class TodoRepository : ITodoRepository
     {
-        private readonly string cs = @"Server=ARTHUR;Database=Development;User Id=developer;Password=sql#developer;Trusted_Connection=True";
+        private IConfiguration _configuration;
+        private string _connectionString;
 
-        private const string SqlGetTodoList = @"SELECT [ID], [Title], [DateCreated], [DateModified] FROM dbo.Todos " + 
-            @"Where Deleted=1 ";
+        private const string SqlGetTodoList = @"SELECT [ID], [Title], [DateCreated], [DateModified] FROM dbo.Todos " + @"Where Deleted=0 ";
+
+        public TodoRepository(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DB");
+        }
 
 
         //Search with parameters example
@@ -39,7 +49,7 @@ namespace TodoList.DataAccess
         public async Task<List<Todo>> GetTodos()
         {
             List<Todo> result;
-            using (var connect = new SqlConnection(cs))
+            using (var connect = new SqlConnection(_connectionString))
             {
                 connect.Open();
                 System.Console.WriteLine(connect.ExecuteScalar<string>("SELECT @@VERSION"));
@@ -51,7 +61,7 @@ namespace TodoList.DataAccess
         public async Task<Todo> GetTodoById(int id)
         {
             Todo result;
-            using (var connect = new SqlConnection(cs))
+            using (var connect = new SqlConnection(_connectionString))
             {
                 connect.Open();
                 var sqlQueryTodo = SqlGetTodoList + $"AND ID = @id ";
@@ -66,7 +76,7 @@ namespace TodoList.DataAccess
             const string sql = @"INSERT INTO dbo.Todos(Title, DateCreated)
             VALUES(@title, @dateCreated)";
             var parameters = new { title = todo.Title, dateCreated = DateTime.UtcNow };
-            using (var connect = new SqlConnection(cs))
+            using (var connect = new SqlConnection(_connectionString))
             {
                 connect.Open();
                 await connect.ExecuteAsync(sql, parameters);
@@ -89,7 +99,7 @@ namespace TodoList.DataAccess
                 deleted = todo.Deleted, 
                 id = id
             };
-            using (var connect = new SqlConnection(cs))
+            using (var connect = new SqlConnection(_connectionString))
             {
                 connect.Open();
                 await connect.ExecuteAsync(sql, parameters);
