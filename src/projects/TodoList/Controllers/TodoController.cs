@@ -29,7 +29,7 @@ namespace TodoList.Controllers
             await _todoService.SaveTodo(todo);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("delete/{id}")]
         public async Task Delete(int id)
         {
