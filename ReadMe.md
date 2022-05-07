@@ -35,3 +35,4 @@
 
 ## AWS
 - [ ] Deploy the APP to AWS EB
+- [ ] Use terrform to deploy SPA to S3

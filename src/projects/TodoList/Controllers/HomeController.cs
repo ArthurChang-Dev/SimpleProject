@@ -8,19 +8,25 @@ namespace TodoList.Controllers
 {
     [ApiController]
     [Route("home")]
+    [Route("/")]
     public class HomeController : ControllerBase
     {
         [HttpGet]
+        public string Get()
+        {
+            return "Welcome to Beanstalk";
+        }
+
+        [HttpGet("ping")]
         public string Ping()
         {
             return "Pong";
         }
 
-        [HttpGet]
-        //public Task<ActionResult<>>
-        public string AppInit()
+        [HttpGet("test")]
+        public string Test()
         {
-            return "This is initial data";
+            return "This is a test.";
         }
 
     }

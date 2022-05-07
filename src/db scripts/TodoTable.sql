@@ -10,6 +10,7 @@ BEGIN
 		[Title] NVARCHAR(256) NOT NULL,
 		[DateCreated] DATETIME2 NOT NULL,
 		[DateModified] DATETIME2,
+		[Deleted] BIT DEFAULT(0)
 	);
 END
 

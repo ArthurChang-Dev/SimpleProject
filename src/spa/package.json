@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --mode production --config webpack.config.js",
     "start": "webpack serve --mode development --config webpack.config.js --color --progress",
     "start:dev": "cross-env PROXY=http://localhost:3300 yarn start",
     "test": "echo \"Error: no test specified\" && exit 1"
